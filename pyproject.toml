@@ -1,0 +1,18 @@
+[tool.poetry]
+name = "rishat-test-task"
+version = "0.1.0"
+description = ""
+authors = ["Aleksey Kosin <akosin@udm.ru>"]
+readme = "README.md"
+packages = [{include = "rishat_test_task"}]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+django = "^4.1.7"
+stripe = "^5.2.0"
+python-dotenv = "^0.21.1"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
