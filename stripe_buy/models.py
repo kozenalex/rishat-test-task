@@ -12,9 +12,9 @@ class Item(models.Model):
 class Discount(models.Model):
 
     DURATION_CHOICES = (
-        ('ONCE', 'once'),
-        ('FOREVER', 'forever'),
-        ('REAPITING', 'repeating'),
+        ('once', 'ONCE'),
+        ('forever', 'FOREVER'),
+        ('repeating', 'REAPITING'),
     )
 
     duration = models.CharField(choices=DURATION_CHOICES, max_length=10, default='ONCE')
@@ -23,7 +23,7 @@ class Discount(models.Model):
 
 class Order(models.Model):
 
-    discount = models.ForeignKey(Discount, on_delete=models.CASCADE, null=True)
+    discount = models.ForeignKey(Discount, on_delete=models.CASCADE, null=True, blank=True)
     items = models.ManyToManyField(Item, through='OrderToItem')
 
     def __str__(self) -> str:
@@ -31,6 +31,6 @@ class Order(models.Model):
 
 class OrderToItem(models.Model):
 
-    item = models.ForeignKey(Item, on_delete=models.CASCADE)
-    order = models.ForeignKey(Order, on_delete=models.PROTECT)
+    item = models.ForeignKey(Item, on_delete=models.PROTECT)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
 

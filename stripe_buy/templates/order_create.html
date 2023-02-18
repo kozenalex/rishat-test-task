@@ -1,0 +1,12 @@
+<html>
+    <title>Набрать заказ</title>
+    <body>
+        <form action="." method="POST">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit" class="btn btn-primary">
+                Оформить
+            </button>
+        </form>
+    </body>
+</html>
