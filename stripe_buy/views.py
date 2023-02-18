@@ -70,28 +70,42 @@ class OrderBuyView(View):
         order = Order.objects.get(pk=kwargs['pk'])
         stripe.api_key = STRIPE_KEY
         order_items = order.items.all()
-        coupon = stripe.Coupon.create(
-                duration=order.discount.duration,
-                id=order.discount.dis_id,
-                percent_off=order.discount.percent_off
-            ) if order.discount else None
+        coupon = None
+        tax_rates = []
+        if order.discount:
+            try:
+                coupon = stripe.Coupon.retrieve(order.discount.dis_id)
+            except stripe.error.InvalidRequestError:
+                coupon = stripe.Coupon.create(
+                        duration=order.discount.duration,
+                        id=order.discount.dis_id,
+                        percent_off=order.discount.percent_off
+                    )
+            for tax in order.taxes.all():
+                tax_rate = stripe.TaxRate.create(
+                    display_name=tax.display_name,
+                    percentage=tax.percentage,
+                    inclusive=tax.inclusive,
+                    )
+                tax_rates.append(tax_rate.id)
         stripe_line_items=[{
             'price_data': {
                 'currency': 'usd',
                 'product_data': {
                     'name': item.name,
                 },
-            'unit_amount_decimal': item.price,
+            'unit_amount': item.price,
             },
             'quantity': 1,
+            'tax_rates': tax_rates
             } for item in order_items]
         session = stripe.checkout.Session.create(
             line_items=stripe_line_items,
             mode='payment',
             discounts=[{
                 'coupon': coupon.id,}] if coupon else None,
-            success_url='http://localhost:4242/success',
-            cancel_url='http://localhost:4242/cancel',
+            success_url=f'http://127.0.0.1:8000/orders/',
+            cancel_url=f'http://127.0.0.1:8000/orders/{order.id}',
         )
         data = json.dumps(session)
         return HttpResponse(data, content_type='application/json')

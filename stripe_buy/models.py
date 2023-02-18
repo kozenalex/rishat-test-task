@@ -21,9 +21,22 @@ class Discount(models.Model):
     dis_id = models.CharField(max_length=255)
     percent_off = models.PositiveIntegerField()
 
+    def __str__(self) -> str:
+        return f'Discount for {self.percent_off} %'
+
+class Tax(models.Model):
+
+    display_name = models.CharField(max_length=10)
+    percentage = models.PositiveIntegerField()
+    inclusive = models.BooleanField()
+
+    def __str__(self) -> str:
+        return f'The {self.display_name} Tax'
+
 class Order(models.Model):
 
     discount = models.ForeignKey(Discount, on_delete=models.CASCADE, null=True, blank=True)
+    taxes = models.ManyToManyField(Tax)
     items = models.ManyToManyField(Item, through='OrderToItem')
 
     def __str__(self) -> str:

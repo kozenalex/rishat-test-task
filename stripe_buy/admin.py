@@ -1,5 +1,5 @@
 from django.contrib import admin
-from stripe_buy.models import Item, Order, OrderToItem, Discount
+from stripe_buy.models import Item, Order, OrderToItem, Discount, Tax
 # Register your models here.
 
 class OrderInline(admin.TabularInline):
@@ -14,3 +14,4 @@ class OrderAdmin(admin.ModelAdmin):
 admin.site.register(Item)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(Discount)
+admin.site.register(Tax)
