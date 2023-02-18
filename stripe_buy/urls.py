@@ -20,5 +20,7 @@ from stripe_buy import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('item/<int:pk>', views.ItemView.as_view(), name='get_item'),
-    path('buy/<int:pk>', views.BuyItemView.as_view(), name='buy_item')
+    path('buy/<int:pk>', views.BuyItemView.as_view(), name='buy_item'),
+    path('order/<int:pk>', views.OrderView.as_view(), name='get_order'),
+    path('buy-order/<int:pk>', views.OrderBuyView.as_view(), name='buy_order')
 ]
