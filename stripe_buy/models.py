@@ -2,9 +2,16 @@ from django.db import models
 
 class Item(models.Model):
 
+
+    CURR_CHOICES = (
+        ('usd', 'USD'),
+        ('eur', 'EUR'),
+    )
+
     name = models.CharField(max_length=255, verbose_name='Наименование')
     description = models.TextField(verbose_name='Описание')
     price = models.PositiveIntegerField(verbose_name='Цена')
+    currency = models.CharField(max_length=3, choices=CURR_CHOICES, default='USD')
 
     def __str__(self) -> str:
         return self.name

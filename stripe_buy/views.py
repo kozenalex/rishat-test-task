@@ -34,7 +34,7 @@ class BuyItemView(View):
         session = stripe.checkout.Session.create(
             line_items=[{
             'price_data': {
-                'currency': 'usd',
+                'currency': item.currency,
                 'product_data': {
                     'name': item.name,
                 },
@@ -90,7 +90,7 @@ class OrderBuyView(View):
                 tax_rates.append(tax_rate.id)
         stripe_line_items=[{
             'price_data': {
-                'currency': 'usd',
+                'currency': item.currency,
                 'product_data': {
                     'name': item.name,
                 },
