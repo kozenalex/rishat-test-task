@@ -107,7 +107,7 @@ class OrderBuyView(View):
             mode='payment',
             discounts=[{
                 'coupon': coupon.id,}] if coupon else None,
-            success_url=PAY_REDIRECT_URL
+            success_url=PAY_REDIRECT_URL,
             cancel_url=PAY_REDIRECT_URL,
         )
         data = json.dumps(session)
