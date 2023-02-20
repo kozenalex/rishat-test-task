@@ -13,7 +13,7 @@ install:
 run:
 		@$(MANAGE) runserver
 addadmin:
-		@$(MANAGE) createsuperuser
+		@$(MANAGE) add_admin
 silentaddadmin:
 		@$(MANAGE) createsuperuser --noinput admin
 .PHONY: test
