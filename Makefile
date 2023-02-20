@@ -14,8 +14,12 @@ run:
 		@$(MANAGE) runserver
 addadmin:
 		@$(MANAGE) createsuperuser
+silentaddadmin:
+		@$(MANAGE) createsuperuser --noinput admin
 .PHONY: test
 test:
 		@$(MANAGE) test --with-coverage --cover-xml
 lint:
 		flake8 stripe_buy
+start:
+	poetry run gunicorn stripe_buy.wsgi

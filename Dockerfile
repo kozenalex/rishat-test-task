@@ -2,8 +2,10 @@ FROM python:latest
 
 RUN pip3 install poetry
 
-WORKDIR $HOME/stripe_buy
+WORKDIR $HOME/
 COPY . .
 RUN poetry install
 
-CMD ["make", "migrate", "&&", "gunicorn", "stripe_buy.wsgi"]
+RUN DJANGO_SUPERUSER_PASSWORD=Qwerty123 make silentaddadmin
+
+CMD ["make", "migrate", "&&", "make", "start"]
