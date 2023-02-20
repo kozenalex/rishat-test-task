@@ -7,7 +7,7 @@ from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView
 from stripe_buy.forms import OrderForm
 from stripe_buy.models import Item, Order
-from stripe_buy.settings import STRIPE_KEY
+from stripe_buy.settings import STRIPE_KEY, PAY_REDIRECT_URL
 import stripe
 import json
 
@@ -46,8 +46,8 @@ class BuyItemView(View):
             'quantity': 1,
             }],
             mode='payment',
-            success_url='http://localhost:4242/success',
-            cancel_url='http://localhost:4242/cancel',
+            success_url=PAY_REDIRECT_URL,
+            cancel_url=PAY_REDIRECT_URL,
         )
         data = json.dumps(session)
         return HttpResponse(data, content_type='application/json')
@@ -107,8 +107,8 @@ class OrderBuyView(View):
             mode='payment',
             discounts=[{
                 'coupon': coupon.id,}] if coupon else None,
-            success_url=f'http://127.0.0.1:8000/orders/',
-            cancel_url=f'http://127.0.0.1:8000/orders/{order.id}',
+            success_url=PAY_REDIRECT_URL
+            cancel_url=PAY_REDIRECT_URL,
         )
         data = json.dumps(session)
         return HttpResponse(data, content_type='application/json')

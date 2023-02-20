@@ -8,6 +8,6 @@ RUN poetry install
 
 RUN make migrate
 
-RUN DJANGO_SUPERUSER_PASSWORD=Qwerty123 make silentaddadmin
+RUN make addadmin
 
 CMD ["make", "start"]

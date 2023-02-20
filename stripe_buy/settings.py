@@ -28,7 +28,7 @@ load_dotenv(dotenv_path=env_path)
 SECRET_KEY = os.getenv('SECRET_KEY', 'workaround')
 STRIPE_KEY = os.getenv('STRIPE_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.getenv('DEBUG', True)
 
 ALLOWED_HOSTS = ['*']
 
@@ -130,3 +130,5 @@ CSRF_TRUSTED_ORIGINS = ["https://stripe-buy-test-sample.onrender.com/"]
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+PAY_REDIRECT_URL = 'http://127.0.0.1:8000' if DEBUG else 'http://0.0.0.0:10000'
