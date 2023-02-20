@@ -22,4 +22,4 @@ test:
 lint:
 		flake8 stripe_buy
 start:
-	poetry run gunicorn stripe_buy.wsgi
+	gunicorn stripe_buy.wsgi

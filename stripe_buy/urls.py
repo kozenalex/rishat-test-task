@@ -18,7 +18,8 @@ from django.urls import path
 from stripe_buy import views
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name='admin_page'),
+    path('', views.IndexView.as_view(), name='index_page'),
     path('item/<int:pk>', views.ItemView.as_view(), name='get_item'),
     path('items/', views.ItemListView.as_view(), name = 'items_list'),
     path('buy/<int:pk>', views.BuyItemView.as_view(), name='buy_item'),

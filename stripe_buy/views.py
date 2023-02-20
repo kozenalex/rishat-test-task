@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.urls import reverse_lazy
 from django.views import View
 from django.shortcuts import render
+from django.views.generic import TemplateView
 from django.views.generic.list import ListView
 from django.views.generic.edit import CreateView
 from stripe_buy.forms import OrderForm
@@ -10,7 +11,9 @@ from stripe_buy.settings import STRIPE_KEY
 import stripe
 import json
 
+class IndexView(TemplateView):
 
+    template_name = 'index.html'
 
 class ItemView(View):
 
