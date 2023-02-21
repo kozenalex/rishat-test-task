@@ -57,11 +57,13 @@ class OrderView(View):
     def get(self, request, *agrs, **kwargs):
 
         order = Order.objects.get(id=kwargs['pk'])
+        multi_currency_order = order.items.filter(currency='usd') and order.items.filter(currency='eur')
         return render(
             request,
             'order.html',
             context={
-            'order': order
+            'order': order,
+            'error': multi_currency_order
             }
         )
 
@@ -102,6 +104,7 @@ class OrderBuyView(View):
             'quantity': 1,
             'tax_rates': tax_rates
             } for item in order_items]
+
         session = stripe.checkout.Session.create(
             line_items=stripe_line_items,
             mode='payment',
@@ -110,6 +113,7 @@ class OrderBuyView(View):
             success_url=PAY_REDIRECT_URL,
             cancel_url=PAY_REDIRECT_URL,
         )
+
         data = json.dumps(session)
         return HttpResponse(data, content_type='application/json')
 

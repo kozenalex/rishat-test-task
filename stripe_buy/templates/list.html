@@ -1,6 +1,9 @@
 <html>
     <title>{{title}}</title>
     <body>
+        {% if error%}
+        <h5>{{ error }}</h5>
+        {% endif %}
         <ol>
             {% for item in items %}
             <li>{{item}}: <a href="{% url link pk=item.id %}"> Оплатить </a></li>

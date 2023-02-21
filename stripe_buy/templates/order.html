@@ -10,7 +10,11 @@
         <li>{{item.name}}</li>
         {% endfor %}
     </ul>
+    {% if error %}
+    <h5>Order with different currency items, can't buy!!</h5>
+    {% else %}
     <button id="buy-button">Buy</button>
+    {% endif %}
     <script type="text/javascript">
       var stripe = Stripe('pk_test_51McSxiIQkM2iQbI8TuhtBCqnliNo4RsMl3zyrIJpMNb2U6MLKWzOLnA2YwyiYw01y1vnWBu3u8FOrmOaalQSTINi00wYuEYqZ0');
       var buyButton = document.getElementById('buy-button');

@@ -1,7 +1,9 @@
-version: '2.15.1'
 services:
-   web:
-       build: .
-       command: make run
-       ports:
-           - 8000:8000
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file:
+      - .env
+    ports:
+      - 127.0.0.1:8000:8000

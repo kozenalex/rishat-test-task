@@ -14,12 +14,15 @@ run:
 		@$(MANAGE) runserver
 addadmin:
 		@$(MANAGE) add_admin
-silentaddadmin:
-		@$(MANAGE) createsuperuser --noinput admin
-.PHONY: test
-test:
-		@$(MANAGE) test --with-coverage --cover-xml
 lint:
 		flake8 stripe_buy
+localstart:
+		poetry run gunicorn -b 0.0.0.0:8000 stripe_buy.wsgi
 start:
 		gunicorn stripe_buy.wsgi
+build:
+		docker compose build
+startdocker:
+		docker compose up -d
+stopdocker:
+		docker compose down
