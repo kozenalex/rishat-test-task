@@ -1,13 +1,14 @@
-<html>
-  <head>
-    <script src="https://js.stripe.com/v3/"></script>
-    <title>Buy {{ item.name }}</title>
-  </head>
-  <body>
-    <h1>Item: {{ item.name }}</h1>
+{% extends 'layout.html' %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+
+{% block content %}
+
+  <div class="container m-10">
+    <h3>Item: {{ item.name }}</h3>
     <p>Description of {{item.name}}</p>
     <p>{{item.description}}</p>
-    <button id="buy-button">Buy</button>
+    <button id="buy-button" class="btn-primary">Buy</button>
     <script type="text/javascript">
       var stripe = Stripe('pk_test_51McSxiIQkM2iQbI8TuhtBCqnliNo4RsMl3zyrIJpMNb2U6MLKWzOLnA2YwyiYw01y1vnWBu3u8FOrmOaalQSTINi00wYuEYqZ0');
       var buyButton = document.getElementById('buy-button');
@@ -24,5 +25,5 @@
         })
       });
     </script>
-  </body>
-</html>
+  </div>
+{% endblock %}

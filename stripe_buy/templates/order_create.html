@@ -1,12 +1,17 @@
-<html>
-    <title>Набрать заказ</title>
-    <body>
-        <form action="." method="POST">
+{% extends 'layout.html' %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+
+
+{% block content %}
+        <div class="container m-10">
+        <h3>Набрать заказ</h3>
+        <form action="." method="POST" class="form">
             {% csrf_token %}
-            {{ form }}
+            {% bootstrap_form form %}
             <button type="submit" class="btn btn-primary">
                 Оформить
             </button>
         </form>
-    </body>
-</html>
+        </div>
+{% endblock %}

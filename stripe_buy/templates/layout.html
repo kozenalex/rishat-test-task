@@ -1,0 +1,20 @@
+{% load bootstrap4 %}
+{% bootstrap_css %}
+<!DOCTYPE html>
+<html lang="{{ LANGUAGE_CODE }}">
+  <head>
+    <script src="https://js.stripe.com/v3/"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Simple Stripe Buy Test</title>
+    {% bootstrap_css %}
+  </head>
+  <body class="bg-light">
+    <div class="container mt-4">
+        <header>
+            <a href="{% url 'index_page' %}" class="nav-link">Home</a>
+        </header>
+      </div>
+      {% block content %}
+      {% endblock %}
+    </body>
+</html>

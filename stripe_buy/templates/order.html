@@ -1,10 +1,10 @@
-<html>
-  <head>
-    <script src="https://js.stripe.com/v3/"></script>
-    <title>Buy order</title>
-  </head>
-  <body>
-    <h1>Order:</h1>
+{% extends 'layout.html' %}
+{% load bootstrap4 %}
+{% bootstrap_css %}
+
+{% block content %}
+<div class="container m-10">
+    <h3>Order:</h3>
     <ul>
         {% for item in order.items.all %}
         <li>{{item.name}}</li>
@@ -13,7 +13,7 @@
     {% if error %}
     <h5>Order with different currency items, can't buy!!</h5>
     {% else %}
-    <button id="buy-button">Buy</button>
+    <button id="buy-button" class="btn-primary">Buy</button>
     {% endif %}
     <script type="text/javascript">
       var stripe = Stripe('pk_test_51McSxiIQkM2iQbI8TuhtBCqnliNo4RsMl3zyrIJpMNb2U6MLKWzOLnA2YwyiYw01y1vnWBu3u8FOrmOaalQSTINi00wYuEYqZ0');
@@ -31,5 +31,5 @@
         })
       });
     </script>
-  </body>
-</html>
+</div>
+{% endblock %}
