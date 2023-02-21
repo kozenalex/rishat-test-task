@@ -21,5 +21,3 @@ test:
 		@$(MANAGE) test --with-coverage --cover-xml
 lint:
 		flake8 stripe_buy
-start:
-	gunicorn stripe_buy.wsgi

@@ -9,3 +9,5 @@ RUN poetry install
 RUN make migrate
 
 RUN make addadmin
+
+CMD ["make", "run"]
